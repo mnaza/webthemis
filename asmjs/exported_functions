@@ -1,0 +1,15 @@
+[
+ "_malloc",
+ "_free",
+ "_themis_secure_cell_encrypt_seal",
+ "_themis_secure_cell_decrypt_seal",
+ "_themis_secure_message_wrap",
+ "_themis_secure_message_unwrap",
+ "_secure_session_client_create",
+ "_secure_session_client_connect_request",
+ "_secure_session_client_wrap",
+ "_secure_session_client_unwrap",
+ "_secure_session_client_destroy",
+ "_secure_session_client_is_established",
+ "_gen_key"
+]

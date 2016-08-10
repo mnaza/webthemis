@@ -1,0 +1,62 @@
+<html>
+<head>
+<script src="themis-raw.js"></script>
+</head>
+<body>
+  <script>
+    function res_buf(length){
+       this.length_ = _malloc(4);
+       this.address_ = _malloc(length);
+       setValue(this.length_, length, "i32", true);
+    }
+
+    res_buf.prototype.length = function(){
+       this.length_
+    }
+    
+    function param_buf(data){
+        var address=_malloc(data.length);
+        stringToAscii(data, address);
+        return address;
+    }
+
+    function get_bytes(address, length){
+       var res = new Uint8Array(length);
+       res.set(HEAPU8.subarray(address, address+length));
+       return res;
+    }
+    
+//    Module._main = function() {    
+
+    var gen_key_func=Module.cwrap('gen_key','string',[]);
+    var secure_session_create=Module.cwrap('secure_session_client_create','pointer',['string', 'string', 'string', 'string']);
+    var secure_session_destroy=Module.cwrap('secure_session_client_destroy','number',['number']);
+    
+    var client_pair = gen_key_func().split(' ');
+    var server_pair = gen_key_func().split(' ');
+    var client_session = secure_session_create('client', client_pair[0], "server", server_pair[1]);
+    alert(client_session);
+    var server_session = secure_session_create('server', server_pair[0], "client", client_pair[1]);
+    alert(server_session);
+    
+    
+    
+    var connect_request=new res_buf(1024);
+    var a = _secure_session_client_connect_request(client_session, connect_request.address_, connect_request.length_);
+    alert(a);
+    alert(getValue(connect_request.length_, 'i32', true));
+
+    var s_u = new res_buf(1024);
+    a = _secure_session_client_unwrap(server_session, connect_request.address_, getValue(connect_request.length_, 'i32', true), s_u.address_, s_u.length_);
+    alert(a);
+    alert(getValue(s_u.length_, 'i32', true));
+
+    a=secure_session_destroy(client_session);
+    alert(a);
+    a=secure_session_destroy(server_session);
+    alert(a);
+
+//}
+</script>
+</body>
+</html>
