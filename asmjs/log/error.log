@@ -682,3 +682,211 @@
 2016-08-05 08:19:02: (server.c.1294) WARNING: unknown config-key: spake2-auth.password (ignored) 
 2016-08-06 21:55:41: (server.c.1738) [note] graceful shutdown started 
 2016-08-06 21:55:41: (server.c.1812) server stopped by UID = 0 PID = 0 
+2016-08-10 17:21:11: (log.c.216) server started 
+2016-08-10 17:21:11: (server.c.1294) WARNING: unknown config-key: auth.backend (ignored) 
+2016-08-10 17:21:11: (server.c.1294) WARNING: unknown config-key: auth.backend.plain.userfile (ignored) 
+2016-08-10 17:21:11: (server.c.1294) WARNING: unknown config-key: themis-auth.loglevel (ignored) 
+2016-08-10 17:21:11: (server.c.1294) WARNING: unknown config-key: themis-auth.enable (ignored) 
+2016-08-10 17:21:11: (server.c.1294) WARNING: unknown config-key: themis-auth.username (ignored) 
+2016-08-10 17:21:11: (server.c.1294) WARNING: unknown config-key: themis-auth.password (ignored) 
+2016-08-10 17:21:11: (server.c.1294) WARNING: unknown config-key: auth.require (ignored) 
+2016-08-10 17:21:11: (server.c.1294) WARNING: unknown config-key: spake2-auth.loglevel (ignored) 
+2016-08-10 17:21:11: (server.c.1294) WARNING: unknown config-key: spake2-auth.enable (ignored) 
+2016-08-10 17:21:11: (server.c.1294) WARNING: unknown config-key: spake2-auth.username (ignored) 
+2016-08-10 17:21:11: (server.c.1294) WARNING: unknown config-key: spake2-auth.password (ignored) 
+2016-08-10 17:21:56: (server.c.1738) [note] graceful shutdown started 
+2016-08-10 17:21:56: (server.c.1812) server stopped by UID = 0 PID = 0 
+2016-08-10 17:24:53: (log.c.216) server started 
+2016-08-10 17:24:53: (server.c.1294) WARNING: unknown config-key: auth.backend (ignored) 
+2016-08-10 17:24:53: (server.c.1294) WARNING: unknown config-key: auth.backend.plain.userfile (ignored) 
+2016-08-10 17:24:53: (server.c.1294) WARNING: unknown config-key: themis-auth.loglevel (ignored) 
+2016-08-10 17:24:53: (server.c.1294) WARNING: unknown config-key: themis-auth.enable (ignored) 
+2016-08-10 17:24:53: (server.c.1294) WARNING: unknown config-key: themis-auth.username (ignored) 
+2016-08-10 17:24:53: (server.c.1294) WARNING: unknown config-key: themis-auth.password (ignored) 
+2016-08-10 17:24:53: (server.c.1294) WARNING: unknown config-key: auth.require (ignored) 
+2016-08-10 17:24:53: (server.c.1294) WARNING: unknown config-key: spake2-auth.loglevel (ignored) 
+2016-08-10 17:24:53: (server.c.1294) WARNING: unknown config-key: spake2-auth.enable (ignored) 
+2016-08-10 17:24:53: (server.c.1294) WARNING: unknown config-key: spake2-auth.username (ignored) 
+2016-08-10 17:24:53: (server.c.1294) WARNING: unknown config-key: spake2-auth.password (ignored) 
+2016-08-10 17:30:56: (server.c.1738) [note] graceful shutdown started 
+2016-08-10 17:30:56: (server.c.1812) server stopped by UID = 0 PID = 0 
+2016-08-10 17:31:11: (log.c.216) server started 
+2016-08-10 17:31:11: (server.c.1294) WARNING: unknown config-key: auth.backend (ignored) 
+2016-08-10 17:31:11: (server.c.1294) WARNING: unknown config-key: auth.backend.plain.userfile (ignored) 
+2016-08-10 17:31:11: (server.c.1294) WARNING: unknown config-key: themis-auth.loglevel (ignored) 
+2016-08-10 17:31:11: (server.c.1294) WARNING: unknown config-key: themis-auth.enable (ignored) 
+2016-08-10 17:31:11: (server.c.1294) WARNING: unknown config-key: themis-auth.username (ignored) 
+2016-08-10 17:31:11: (server.c.1294) WARNING: unknown config-key: themis-auth.password (ignored) 
+2016-08-10 17:31:11: (server.c.1294) WARNING: unknown config-key: auth.require (ignored) 
+2016-08-10 17:31:11: (server.c.1294) WARNING: unknown config-key: spake2-auth.loglevel (ignored) 
+2016-08-10 17:31:11: (server.c.1294) WARNING: unknown config-key: spake2-auth.enable (ignored) 
+2016-08-10 17:31:11: (server.c.1294) WARNING: unknown config-key: spake2-auth.username (ignored) 
+2016-08-10 17:31:11: (server.c.1294) WARNING: unknown config-key: spake2-auth.password (ignored) 
+2016-08-10 17:39:37: (server.c.1738) [note] graceful shutdown started 
+2016-08-10 17:39:37: (server.c.1812) server stopped by UID = 0 PID = 0 
+2016-08-10 17:47:09: (log.c.216) server started 
+2016-08-10 17:47:09: (server.c.1294) WARNING: unknown config-key: auth.backend (ignored) 
+2016-08-10 17:47:09: (server.c.1294) WARNING: unknown config-key: auth.backend.plain.userfile (ignored) 
+2016-08-10 17:47:09: (server.c.1294) WARNING: unknown config-key: themis-auth.loglevel (ignored) 
+2016-08-10 17:47:09: (server.c.1294) WARNING: unknown config-key: themis-auth.enable (ignored) 
+2016-08-10 17:47:09: (server.c.1294) WARNING: unknown config-key: themis-auth.username (ignored) 
+2016-08-10 17:47:09: (server.c.1294) WARNING: unknown config-key: themis-auth.password (ignored) 
+2016-08-10 17:47:09: (server.c.1294) WARNING: unknown config-key: auth.require (ignored) 
+2016-08-10 17:47:09: (server.c.1294) WARNING: unknown config-key: spake2-auth.loglevel (ignored) 
+2016-08-10 17:47:09: (server.c.1294) WARNING: unknown config-key: spake2-auth.enable (ignored) 
+2016-08-10 17:47:09: (server.c.1294) WARNING: unknown config-key: spake2-auth.username (ignored) 
+2016-08-10 17:47:09: (server.c.1294) WARNING: unknown config-key: spake2-auth.password (ignored) 
+2016-08-10 17:48:06: (server.c.1738) [note] graceful shutdown started 
+2016-08-10 17:48:06: (server.c.1812) server stopped by UID = 0 PID = 0 
+2016-08-10 17:54:34: (log.c.216) server started 
+2016-08-10 17:54:34: (server.c.1294) WARNING: unknown config-key: auth.backend (ignored) 
+2016-08-10 17:54:34: (server.c.1294) WARNING: unknown config-key: auth.backend.plain.userfile (ignored) 
+2016-08-10 17:54:34: (server.c.1294) WARNING: unknown config-key: themis-auth.loglevel (ignored) 
+2016-08-10 17:54:34: (server.c.1294) WARNING: unknown config-key: themis-auth.enable (ignored) 
+2016-08-10 17:54:34: (server.c.1294) WARNING: unknown config-key: themis-auth.username (ignored) 
+2016-08-10 17:54:34: (server.c.1294) WARNING: unknown config-key: themis-auth.password (ignored) 
+2016-08-10 17:54:34: (server.c.1294) WARNING: unknown config-key: auth.require (ignored) 
+2016-08-10 17:54:34: (server.c.1294) WARNING: unknown config-key: spake2-auth.loglevel (ignored) 
+2016-08-10 17:54:34: (server.c.1294) WARNING: unknown config-key: spake2-auth.enable (ignored) 
+2016-08-10 17:54:34: (server.c.1294) WARNING: unknown config-key: spake2-auth.username (ignored) 
+2016-08-10 17:54:34: (server.c.1294) WARNING: unknown config-key: spake2-auth.password (ignored) 
+2016-08-10 17:59:24: (server.c.1738) [note] graceful shutdown started 
+2016-08-10 17:59:24: (server.c.1812) server stopped by UID = 0 PID = 0 
+2016-08-10 18:06:45: (log.c.216) server started 
+2016-08-10 18:06:45: (server.c.1294) WARNING: unknown config-key: auth.backend (ignored) 
+2016-08-10 18:06:45: (server.c.1294) WARNING: unknown config-key: auth.backend.plain.userfile (ignored) 
+2016-08-10 18:06:45: (server.c.1294) WARNING: unknown config-key: themis-auth.loglevel (ignored) 
+2016-08-10 18:06:45: (server.c.1294) WARNING: unknown config-key: themis-auth.enable (ignored) 
+2016-08-10 18:06:45: (server.c.1294) WARNING: unknown config-key: themis-auth.username (ignored) 
+2016-08-10 18:06:45: (server.c.1294) WARNING: unknown config-key: themis-auth.password (ignored) 
+2016-08-10 18:06:45: (server.c.1294) WARNING: unknown config-key: auth.require (ignored) 
+2016-08-10 18:06:45: (server.c.1294) WARNING: unknown config-key: spake2-auth.loglevel (ignored) 
+2016-08-10 18:06:45: (server.c.1294) WARNING: unknown config-key: spake2-auth.enable (ignored) 
+2016-08-10 18:06:45: (server.c.1294) WARNING: unknown config-key: spake2-auth.username (ignored) 
+2016-08-10 18:06:45: (server.c.1294) WARNING: unknown config-key: spake2-auth.password (ignored) 
+2016-08-10 22:42:58: (server.c.1738) [note] graceful shutdown started 
+2016-08-10 22:42:58: (server.c.1812) server stopped by UID = 0 PID = 0 
+2016-08-11 11:39:18: (log.c.216) server started 
+2016-08-11 11:39:18: (server.c.1294) WARNING: unknown config-key: auth.backend (ignored) 
+2016-08-11 11:39:18: (server.c.1294) WARNING: unknown config-key: auth.backend.plain.userfile (ignored) 
+2016-08-11 11:39:18: (server.c.1294) WARNING: unknown config-key: themis-auth.loglevel (ignored) 
+2016-08-11 11:39:18: (server.c.1294) WARNING: unknown config-key: themis-auth.enable (ignored) 
+2016-08-11 11:39:18: (server.c.1294) WARNING: unknown config-key: themis-auth.username (ignored) 
+2016-08-11 11:39:18: (server.c.1294) WARNING: unknown config-key: themis-auth.password (ignored) 
+2016-08-11 11:39:18: (server.c.1294) WARNING: unknown config-key: auth.require (ignored) 
+2016-08-11 11:39:18: (server.c.1294) WARNING: unknown config-key: spake2-auth.loglevel (ignored) 
+2016-08-11 11:39:18: (server.c.1294) WARNING: unknown config-key: spake2-auth.enable (ignored) 
+2016-08-11 11:39:18: (server.c.1294) WARNING: unknown config-key: spake2-auth.username (ignored) 
+2016-08-11 11:39:18: (server.c.1294) WARNING: unknown config-key: spake2-auth.password (ignored) 
+2016-08-11 12:19:00: (server.c.1738) [note] graceful shutdown started 
+2016-08-11 12:19:00: (server.c.1812) server stopped by UID = 0 PID = 0 
+2016-08-11 12:19:08: (log.c.216) server started 
+2016-08-11 12:19:08: (server.c.1294) WARNING: unknown config-key: auth.backend (ignored) 
+2016-08-11 12:19:08: (server.c.1294) WARNING: unknown config-key: auth.backend.plain.userfile (ignored) 
+2016-08-11 12:19:08: (server.c.1294) WARNING: unknown config-key: themis-auth.loglevel (ignored) 
+2016-08-11 12:19:08: (server.c.1294) WARNING: unknown config-key: themis-auth.enable (ignored) 
+2016-08-11 12:19:08: (server.c.1294) WARNING: unknown config-key: themis-auth.username (ignored) 
+2016-08-11 12:19:08: (server.c.1294) WARNING: unknown config-key: themis-auth.password (ignored) 
+2016-08-11 12:19:08: (server.c.1294) WARNING: unknown config-key: auth.require (ignored) 
+2016-08-11 12:19:08: (server.c.1294) WARNING: unknown config-key: spake2-auth.loglevel (ignored) 
+2016-08-11 12:19:08: (server.c.1294) WARNING: unknown config-key: spake2-auth.enable (ignored) 
+2016-08-11 12:19:08: (server.c.1294) WARNING: unknown config-key: spake2-auth.username (ignored) 
+2016-08-11 12:19:08: (server.c.1294) WARNING: unknown config-key: spake2-auth.password (ignored) 
+2016-08-11 12:46:10: (server.c.1738) [note] graceful shutdown started 
+2016-08-11 12:46:10: (server.c.1812) server stopped by UID = 0 PID = 0 
+2016-08-11 12:46:11: (log.c.216) server started 
+2016-08-11 12:46:11: (server.c.1294) WARNING: unknown config-key: auth.backend (ignored) 
+2016-08-11 12:46:11: (server.c.1294) WARNING: unknown config-key: auth.backend.plain.userfile (ignored) 
+2016-08-11 12:46:11: (server.c.1294) WARNING: unknown config-key: themis-auth.loglevel (ignored) 
+2016-08-11 12:46:11: (server.c.1294) WARNING: unknown config-key: themis-auth.enable (ignored) 
+2016-08-11 12:46:11: (server.c.1294) WARNING: unknown config-key: themis-auth.username (ignored) 
+2016-08-11 12:46:11: (server.c.1294) WARNING: unknown config-key: themis-auth.password (ignored) 
+2016-08-11 12:46:11: (server.c.1294) WARNING: unknown config-key: auth.require (ignored) 
+2016-08-11 12:46:11: (server.c.1294) WARNING: unknown config-key: spake2-auth.loglevel (ignored) 
+2016-08-11 12:46:11: (server.c.1294) WARNING: unknown config-key: spake2-auth.enable (ignored) 
+2016-08-11 12:46:11: (server.c.1294) WARNING: unknown config-key: spake2-auth.username (ignored) 
+2016-08-11 12:46:11: (server.c.1294) WARNING: unknown config-key: spake2-auth.password (ignored) 
+2016-08-11 13:02:25: (server.c.1738) [note] graceful shutdown started 
+2016-08-11 13:02:25: (server.c.1812) server stopped by UID = 0 PID = 0 
+2016-08-11 13:02:45: (log.c.216) server started 
+2016-08-11 13:02:45: (server.c.1294) WARNING: unknown config-key: auth.backend (ignored) 
+2016-08-11 13:02:45: (server.c.1294) WARNING: unknown config-key: auth.backend.plain.userfile (ignored) 
+2016-08-11 13:02:45: (server.c.1294) WARNING: unknown config-key: themis-auth.loglevel (ignored) 
+2016-08-11 13:02:45: (server.c.1294) WARNING: unknown config-key: themis-auth.enable (ignored) 
+2016-08-11 13:02:45: (server.c.1294) WARNING: unknown config-key: themis-auth.username (ignored) 
+2016-08-11 13:02:45: (server.c.1294) WARNING: unknown config-key: themis-auth.password (ignored) 
+2016-08-11 13:02:45: (server.c.1294) WARNING: unknown config-key: auth.require (ignored) 
+2016-08-11 13:02:45: (server.c.1294) WARNING: unknown config-key: spake2-auth.loglevel (ignored) 
+2016-08-11 13:02:45: (server.c.1294) WARNING: unknown config-key: spake2-auth.enable (ignored) 
+2016-08-11 13:02:45: (server.c.1294) WARNING: unknown config-key: spake2-auth.username (ignored) 
+2016-08-11 13:02:45: (server.c.1294) WARNING: unknown config-key: spake2-auth.password (ignored) 
+2016-08-11 13:05:40: (server.c.1738) [note] graceful shutdown started 
+2016-08-11 13:05:40: (server.c.1812) server stopped by UID = 0 PID = 0 
+2016-08-11 13:05:41: (log.c.216) server started 
+2016-08-11 13:05:41: (server.c.1294) WARNING: unknown config-key: auth.backend (ignored) 
+2016-08-11 13:05:41: (server.c.1294) WARNING: unknown config-key: auth.backend.plain.userfile (ignored) 
+2016-08-11 13:05:41: (server.c.1294) WARNING: unknown config-key: themis-auth.loglevel (ignored) 
+2016-08-11 13:05:41: (server.c.1294) WARNING: unknown config-key: themis-auth.enable (ignored) 
+2016-08-11 13:05:41: (server.c.1294) WARNING: unknown config-key: themis-auth.username (ignored) 
+2016-08-11 13:05:41: (server.c.1294) WARNING: unknown config-key: themis-auth.password (ignored) 
+2016-08-11 13:05:41: (server.c.1294) WARNING: unknown config-key: auth.require (ignored) 
+2016-08-11 13:05:41: (server.c.1294) WARNING: unknown config-key: spake2-auth.loglevel (ignored) 
+2016-08-11 13:05:41: (server.c.1294) WARNING: unknown config-key: spake2-auth.enable (ignored) 
+2016-08-11 13:05:41: (server.c.1294) WARNING: unknown config-key: spake2-auth.username (ignored) 
+2016-08-11 13:05:41: (server.c.1294) WARNING: unknown config-key: spake2-auth.password (ignored) 
+2016-08-12 08:09:15: (server.c.1738) [note] graceful shutdown started 
+2016-08-12 08:09:15: (server.c.1812) server stopped by UID = 0 PID = 0 
+2016-08-12 08:10:23: (log.c.216) server started 
+2016-08-12 08:10:23: (server.c.1294) WARNING: unknown config-key: auth.backend (ignored) 
+2016-08-12 08:10:23: (server.c.1294) WARNING: unknown config-key: auth.backend.plain.userfile (ignored) 
+2016-08-12 08:10:23: (server.c.1294) WARNING: unknown config-key: themis-auth.loglevel (ignored) 
+2016-08-12 08:10:23: (server.c.1294) WARNING: unknown config-key: themis-auth.enable (ignored) 
+2016-08-12 08:10:23: (server.c.1294) WARNING: unknown config-key: themis-auth.username (ignored) 
+2016-08-12 08:10:23: (server.c.1294) WARNING: unknown config-key: themis-auth.password (ignored) 
+2016-08-12 08:10:23: (server.c.1294) WARNING: unknown config-key: auth.require (ignored) 
+2016-08-12 08:10:23: (server.c.1294) WARNING: unknown config-key: spake2-auth.loglevel (ignored) 
+2016-08-12 08:10:23: (server.c.1294) WARNING: unknown config-key: spake2-auth.enable (ignored) 
+2016-08-12 08:10:23: (server.c.1294) WARNING: unknown config-key: spake2-auth.username (ignored) 
+2016-08-12 08:10:23: (server.c.1294) WARNING: unknown config-key: spake2-auth.password (ignored) 
+2016-08-12 09:00:21: (log.c.216) server started 
+2016-08-12 09:00:21: (server.c.1294) WARNING: unknown config-key: auth.backend (ignored) 
+2016-08-12 09:00:21: (server.c.1294) WARNING: unknown config-key: auth.backend.plain.userfile (ignored) 
+2016-08-12 09:00:21: (server.c.1294) WARNING: unknown config-key: themis-auth.loglevel (ignored) 
+2016-08-12 09:00:21: (server.c.1294) WARNING: unknown config-key: themis-auth.enable (ignored) 
+2016-08-12 09:00:21: (server.c.1294) WARNING: unknown config-key: themis-auth.username (ignored) 
+2016-08-12 09:00:21: (server.c.1294) WARNING: unknown config-key: themis-auth.password (ignored) 
+2016-08-12 09:00:21: (server.c.1294) WARNING: unknown config-key: auth.require (ignored) 
+2016-08-12 09:00:21: (server.c.1294) WARNING: unknown config-key: spake2-auth.loglevel (ignored) 
+2016-08-12 09:00:21: (server.c.1294) WARNING: unknown config-key: spake2-auth.enable (ignored) 
+2016-08-12 09:00:21: (server.c.1294) WARNING: unknown config-key: spake2-auth.username (ignored) 
+2016-08-12 09:00:21: (server.c.1294) WARNING: unknown config-key: spake2-auth.password (ignored) 
+2016-08-12 10:04:17: (server.c.1738) [note] graceful shutdown started 
+2016-08-12 10:04:17: (server.c.1812) server stopped by UID = 0 PID = 0 
+2016-08-12 10:28:26: (log.c.216) server started 
+2016-08-12 10:28:26: (server.c.1294) WARNING: unknown config-key: auth.backend (ignored) 
+2016-08-12 10:28:26: (server.c.1294) WARNING: unknown config-key: auth.backend.plain.userfile (ignored) 
+2016-08-12 10:28:26: (server.c.1294) WARNING: unknown config-key: themis-auth.loglevel (ignored) 
+2016-08-12 10:28:26: (server.c.1294) WARNING: unknown config-key: themis-auth.enable (ignored) 
+2016-08-12 10:28:26: (server.c.1294) WARNING: unknown config-key: themis-auth.username (ignored) 
+2016-08-12 10:28:26: (server.c.1294) WARNING: unknown config-key: themis-auth.password (ignored) 
+2016-08-12 10:28:26: (server.c.1294) WARNING: unknown config-key: auth.require (ignored) 
+2016-08-12 10:28:26: (server.c.1294) WARNING: unknown config-key: spake2-auth.loglevel (ignored) 
+2016-08-12 10:28:26: (server.c.1294) WARNING: unknown config-key: spake2-auth.enable (ignored) 
+2016-08-12 10:28:26: (server.c.1294) WARNING: unknown config-key: spake2-auth.username (ignored) 
+2016-08-12 10:28:26: (server.c.1294) WARNING: unknown config-key: spake2-auth.password (ignored) 
+2016-08-12 10:29:35: (server.c.1738) [note] graceful shutdown started 
+2016-08-12 10:29:35: (server.c.1812) server stopped by UID = 0 PID = 0 
+2016-08-12 10:31:31: (log.c.216) server started 
+2016-08-12 10:31:31: (server.c.1294) WARNING: unknown config-key: auth.backend (ignored) 
+2016-08-12 10:31:31: (server.c.1294) WARNING: unknown config-key: auth.backend.plain.userfile (ignored) 
+2016-08-12 10:31:31: (server.c.1294) WARNING: unknown config-key: themis-auth.loglevel (ignored) 
+2016-08-12 10:31:31: (server.c.1294) WARNING: unknown config-key: themis-auth.enable (ignored) 
+2016-08-12 10:31:31: (server.c.1294) WARNING: unknown config-key: themis-auth.username (ignored) 
+2016-08-12 10:31:31: (server.c.1294) WARNING: unknown config-key: themis-auth.password (ignored) 
+2016-08-12 10:31:31: (server.c.1294) WARNING: unknown config-key: auth.require (ignored) 
+2016-08-12 10:31:31: (server.c.1294) WARNING: unknown config-key: spake2-auth.loglevel (ignored) 
+2016-08-12 10:31:31: (server.c.1294) WARNING: unknown config-key: spake2-auth.enable (ignored) 
+2016-08-12 10:31:31: (server.c.1294) WARNING: unknown config-key: spake2-auth.username (ignored) 
+2016-08-12 10:31:31: (server.c.1294) WARNING: unknown config-key: spake2-auth.password (ignored) 
+2016-08-12 10:32:19: (server.c.1738) [note] graceful shutdown started 
+2016-08-12 10:32:19: (server.c.1812) server stopped by UID = 0 PID = 0 

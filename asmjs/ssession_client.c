@@ -34,6 +34,8 @@ secure_session_client_t* secure_session_client_create(const char* id, const char
   client->clb.get_public_key_for_id=on_get_pub_key_by_id;
   client->clb.user_data=(void*)client;
   client->server_id_length=strlen(peer_id);
+  client->server_id=malloc(client->server_id_length);
+  if(!(client->server_id)){free(client);return NULL;}
   memcpy(client->server_id, peer_id, client->server_id_length);
   client->server_pub=unbase64(peer_pub_key, strlen(peer_pub_key), &(client->server_pub_length));
   uint8_t *client_priv_key;
