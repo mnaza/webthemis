@@ -1,0 +1,407 @@
+diff --git a/Makefile b/Makefile
+index 2762b38..d67ca5a 100644
+--- a/Makefile
++++ b/Makefile
+@@ -22,7 +22,7 @@ TEST_SRC_PATH = tests
+ TEST_OBJ_PATH = build/tests/obj
+ TEST_BIN_PATH = build/tests
+ 
+-CFLAGS += -I$(SRC_PATH) -I$(SRC_PATH)/wrappers/themis/ -I/usr/local/include -fPIC 
++CFLAGS += -I$(SRC_PATH) -I$(SRC_PATH)/wrappers/themis/ -I/usr/local/include -fPIC
+ LDFLAGS += -L/usr/local/lib
+ 
+ NO_COLOR=\033[0m
+@@ -51,6 +51,10 @@ define themisecho
+       @tput sgr0
+ endef
+ 
++ifdef ASMJS
++    CFLAGS += -DASMJS -DSTRICT_ALIGNMENT
++endif
++
+ ifeq ($(ENGINE),)
+ 	ENGINE=libressl
+ endif
+diff --git a/src/soter/openssl/soter_ec_key.c b/src/soter/openssl/soter_ec_key.c
+index 19c8e8d..cbd2a17 100644
+--- a/src/soter/openssl/soter_ec_key.c
++++ b/src/soter/openssl/soter_ec_key.c
+@@ -164,7 +164,7 @@ soter_status_t soter_engine_specific_to_ec_pub_key(const soter_engine_specific_e
+ 	}
+ 
+ 	memcpy(key->tag, ec_pub_key_tag(curve), SOTER_CONTAINER_TAG_LENGTH);
+-	key->size = htonl(output_length);
++	soter_container_set_size(key, output_length);
+ 	soter_update_container_checksum(key);
+ 	*key_length = output_length;
+ 	res = SOTER_SUCCESS;
+@@ -235,7 +235,7 @@ soter_status_t soter_engine_specific_to_ec_priv_key(const soter_engine_specific_
+ 	}
+ 
+ 	memcpy(key->tag, ec_priv_key_tag(curve), SOTER_CONTAINER_TAG_LENGTH);
+-	key->size = htonl(output_length);
++	soter_container_set_size(key, output_length);
+ 	soter_update_container_checksum(key);
+ 	*key_length = output_length;
+ 	res = SOTER_SUCCESS;
+@@ -261,7 +261,7 @@ soter_status_t soter_ec_pub_key_to_engine_specific(const soter_container_hdr_t *
+ 		return SOTER_INVALID_PARAMETER;
+ 	}
+ 
+-	if (key_length != ntohl(key->size))
++	if (key_length != soter_container_size(key))
+ 	{
+ 		return SOTER_INVALID_PARAMETER;
+ 	}
+@@ -366,7 +366,7 @@ soter_status_t soter_ec_priv_key_to_engine_specific(const soter_container_hdr_t
+ 	EVP_PKEY *pkey = (EVP_PKEY *)(*engine_key);
+ 	soter_status_t res;
+ 
+-	if (key_length != ntohl(key->size))
++	if (key_length != soter_container_size(key))
+ 	{
+ 		return SOTER_INVALID_PARAMETER;
+ 	}
+diff --git a/src/soter/openssl/soter_rsa_key.c b/src/soter/openssl/soter_rsa_key.c
+index af4fc43..5e6daa7 100644
+--- a/src/soter/openssl/soter_rsa_key.c
++++ b/src/soter/openssl/soter_rsa_key.c
+@@ -188,7 +188,7 @@ soter_status_t soter_engine_specific_to_rsa_pub_key(const soter_engine_specific_
+ 	}
+ 
+ 	memcpy(key->tag, rsa_pub_key_tag(rsa_mod_size), SOTER_CONTAINER_TAG_LENGTH);
+-	key->size = htonl(output_length);
++	soter_container_set_size(key, output_length);
+ 	soter_update_container_checksum(key);
+ 	*key_length = output_length;
+ 	res = SOTER_SUCCESS;
+@@ -312,7 +312,7 @@ soter_status_t soter_engine_specific_to_rsa_priv_key(const soter_engine_specific
+ 	}
+ 
+ 	memcpy(key->tag, rsa_priv_key_tag(rsa_mod_size), SOTER_CONTAINER_TAG_LENGTH);
+-	key->size = htonl(output_length);
++	soter_container_set_size(key,output_length);
+ 	soter_update_container_checksum(key);
+ 	*key_length = output_length;
+ 	res = SOTER_SUCCESS;
+@@ -338,7 +338,7 @@ soter_status_t soter_rsa_pub_key_to_engine_specific(const soter_container_hdr_t
+ 	EVP_PKEY *pkey = (EVP_PKEY *)(*engine_key);
+ 	const uint32_t *pub_exp;
+ 
+-	if (key_length != ntohl(key->size))
++	if (key_length != soter_container_size(key))
+ 	{
+ 		return SOTER_INVALID_PARAMETER;
+ 	}
+@@ -437,7 +437,7 @@ soter_status_t soter_rsa_priv_key_to_engine_specific(const soter_container_hdr_t
+ 	const uint32_t *pub_exp;
+ 	const unsigned char *curr_bn = (const unsigned char *)(key + 1);
+ 
+-	if (key_length != ntohl(key->size))
++	if (key_length != soter_container_size(key))
+ 	{
+ 		return SOTER_INVALID_PARAMETER;
+ 	}
+diff --git a/src/soter/openssl/soter_sym.c b/src/soter/openssl/soter_sym.c
+index faceb23..78773f1 100644
+--- a/src/soter/openssl/soter_sym.c
++++ b/src/soter/openssl/soter_sym.c
+@@ -255,7 +255,7 @@ soter_status_t soter_sym_aead_encrypt_final(soter_sym_ctx_t *ctx, void* auth_tag
+     return SOTER_BUFFER_TOO_SMALL;
+   }
+   SOTER_CHECK(soter_sym_aead_ctx_final(ctx, true)==SOTER_SUCCESS);
+-  SOTER_CHECK(EVP_CIPHER_CTX_ctrl(&(ctx->evp_sym_ctx), EVP_CTRL_GCM_GET_TAG, SOTER_AES_GCM_AUTH_TAG_LENGTH, auth_tag));
++  SOTER_CHECK(0!=EVP_CIPHER_CTX_ctrl(&(ctx->evp_sym_ctx), EVP_CTRL_GCM_GET_TAG, SOTER_AES_GCM_AUTH_TAG_LENGTH, auth_tag));
+   (*auth_tag_length)=SOTER_AES_GCM_AUTH_TAG_LENGTH;
+   return SOTER_SUCCESS;
+ }
+diff --git a/src/soter/soter_container.c b/src/soter/soter_container.c
+index 6a4e14d..fee01fe 100644
+--- a/src/soter/soter_container.c
++++ b/src/soter/soter_container.c
+@@ -19,11 +19,12 @@
+ #include <soter/error.h>
+ #include <soter/soter_crc32.h>
+ #include <arpa/inet.h>
++#include <string.h>
++
+ soter_status_t soter_update_container_checksum(soter_container_hdr_t *hdr)
+ {
+-	hdr->crc = 0;
+-	hdr->crc = htonl(soter_crc32(hdr, ntohl(hdr->size)));
+-
++  soter_container_set_crc(hdr, 0);
++  soter_container_set_crc(hdr, soter_crc32(hdr, soter_container_size(hdr)));
+ 	return SOTER_SUCCESS;
+ }
+ 
+@@ -34,10 +35,9 @@ soter_status_t soter_verify_container_checksum(const soter_container_hdr_t *hdr)
+ 
+ 	soter_crc32_update(&crc, hdr, sizeof(soter_container_hdr_t) - sizeof(uint32_t));
+ 	soter_crc32_update(&crc, &dummy_crc, sizeof(uint32_t));
+-	soter_crc32_update(&crc, hdr + 1, ntohl(hdr->size) - sizeof(soter_container_hdr_t));
+-
+-	if (hdr->crc == htonl(soter_crc32_final(&crc)))
+-	{
++	soter_crc32_update(&crc, hdr + 1, soter_container_data_size(hdr));
++	if (soter_container_crc(hdr) == soter_crc32_final(&crc))
++        {
+ 		return SOTER_SUCCESS;
+ 	}
+ 	else
+@@ -45,3 +45,50 @@ soter_status_t soter_verify_container_checksum(const soter_container_hdr_t *hdr)
+ 		return SOTER_DATA_CORRUPT;
+ 	}
+ }
++
++#ifdef STRICT_ALIGNMENT
++size_t soter_container_data_size(const soter_container_hdr_t *hdr){
++  size_t s_size;						       
++  uint8_t* ps_size=(uint8_t*)(&s_size);			       
++  uint8_t* phdr_size=(uint8_t*)(&(hdr->_size));
++  memcpy(ps_size, phdr_size, 4);
++  return ((size_t)ntohl(s_size)) - sizeof(soter_container_hdr_t);
++}
++
++size_t soter_container_size(const soter_container_hdr_t *hdr){
++  size_t s_size;						       
++  uint8_t* ps_size=(uint8_t*)(&s_size);			       
++  uint8_t* phdr_size=(uint8_t*)(&(hdr->_size));
++  memcpy(ps_size, phdr_size, 4);
++  return ((size_t)ntohl(s_size));
++}
++
++uint32_t soter_container_crc(const soter_container_hdr_t *hdr){
++  uint32_t s_crc;						       
++  uint8_t* ps_crc=(uint8_t*)(&s_crc);			       
++  uint8_t* phdr_size=(uint8_t*)(&(hdr->_crc));
++  memcpy(ps_crc, phdr_size, 4);
++  return ((uint32_t)ntohl(s_crc));
++}
++
++void soter_container_set_data_size(soter_container_hdr_t *hdr, const uint32_t data_size){
++  uint32_t msize=htonl(data_size+sizeof(soter_container_hdr_t));
++  const uint8_t *pdata_size = (const uint8_t*)(&msize);
++  uint8_t* phdr_size = (uint8_t*)(&(hdr->_size));
++  memcpy(phdr_size, pdata_size, 4);  
++}
++
++void soter_container_set_size(soter_container_hdr_t *hdr, const uint32_t size){
++  uint32_t msize=htonl(size);
++  const uint8_t *pdata_size = (const uint8_t*)(&msize);
++  uint8_t* phdr_size = (uint8_t*)(&(hdr->_size));
++  memcpy(phdr_size, pdata_size, 4);  
++}
++
++void soter_container_set_crc(soter_container_hdr_t *hdr, const uint32_t crc){
++  uint32_t mcrc=htonl(crc);
++  const uint8_t *pcrc = (const uint8_t*)(&mcrc);
++  uint8_t* phdr_crc = (uint8_t*)(&(hdr->_crc));
++  memcpy(phdr_crc, pcrc, 4);  
++}
++#endif
+diff --git a/src/soter/soter_container.h b/src/soter/soter_container.h
+index cf4cd36..b14506d 100644
+--- a/src/soter/soter_container.h
++++ b/src/soter/soter_container.h
+@@ -25,9 +25,9 @@
+ struct soter_container_hdr_type
+ {
+ 	char tag[SOTER_CONTAINER_TAG_LENGTH];
+-	int32_t size; /* Size is data + sizeof(soter_container_hdr_t), so should be not less than sizeof(soter_container_hdr_t). Network byte order. */
+-	uint32_t crc;
+-};
++	int32_t _size; /* Size is data + sizeof(soter_container_hdr_t), so should be not less than sizeof(soter_container_hdr_t). Network byte order. */
++	uint32_t _crc;
++} __attribute__((aligned (4)));
+ 
+ typedef struct soter_container_hdr_type soter_container_hdr_t;
+ 
+@@ -36,7 +36,20 @@ soter_status_t soter_verify_container_checksum(const soter_container_hdr_t *hdr)
+ 
+ #define soter_container_data(_HDR_) ((uint8_t *)((_HDR_) + 1))
+ #define soter_container_const_data(_HDR_) ((const uint8_t *)((_HDR_) + 1))
+-#define soter_container_data_size(_HDR_) ((size_t)ntohl((_HDR_)->size) - sizeof(soter_container_hdr_t))
+-#define soter_container_set_data_size(_HDR_, _SIZE_) ((_HDR_)->size = htonl(_SIZE_ + sizeof(soter_container_hdr_t)))
++#ifdef STRICT_ALIGNMENT
++size_t soter_container_data_size(const soter_container_hdr_t *hdr);
++size_t soter_container_size(const soter_container_hdr_t *hdr);
++uint32_t soter_container_crc(const soter_container_hdr_t *hdr);
++void soter_container_set_data_size(soter_container_hdr_t *hdr, const uint32_t data_size);
++void soter_container_set_size(soter_container_hdr_t *hdr, const uint32_t size);
++void soter_container_set_crc(soter_container_hdr_t *hdr, const uint32_t crc);
++#else
++#define soter_container_data_size(_HDR_) ((size_t)ntohl((_HDR_)->_size) - sizeof(soter_container_hdr_t))
++#define soter_container_size(_HDR_) ((size_t)ntohl((_HDR_)->_size))
++#define soter_container_crc(_HDR_) ((size_t)ntohl((_HDR_)->_crc))
++#define soter_container_set_size(_HDR_, _SIZE_) ((_HDR_)->_size = _SIZE_)
++#define soter_container_set_crc(_HDR_, _CRC_) ((_HDR_)->_crc = _CRC_)
++#define soter_container_set_data_size(_HDR_, _SIZE_) ((_HDR_)->_size = htonl(_SIZE_ + sizeof(soter_container_hdr_t)))
++#endif
+ 
+ #endif /* SOTER_CONTAINER_H */
+diff --git a/src/themis/portable_endian.h b/src/themis/portable_endian.h
+index 87c0457..c312536 100644
+--- a/src/themis/portable_endian.h
++++ b/src/themis/portable_endian.h
+@@ -119,6 +119,8 @@
+ # define __LITTLE_ENDIAN LITTLE_ENDIAN
+ # define __PDP_ENDIAN PDP_ENDIAN
+  
++#elif defined(ASMJS)
++
+ #else
+  
+ # error platform not supported
+diff --git a/src/themis/secure_message_wrapper.c b/src/themis/secure_message_wrapper.c
+index f109690..f5786b0 100644
+--- a/src/themis/secure_message_wrapper.c
++++ b/src/themis/secure_message_wrapper.c
+@@ -36,7 +36,7 @@
+ 
+ soter_sign_alg_t get_alg_id(const uint8_t* key, size_t key_length)
+ {
+-  if (key_length < sizeof(soter_container_hdr_t) && key_length < ((const soter_container_hdr_t*)key)->size){
++  if (key_length < sizeof(soter_container_hdr_t) && key_length < soter_container_size((const soter_container_hdr_t*)key)){
+     return (soter_sign_alg_t)(-1);
+   }
+   if (memcmp(((const soter_container_hdr_t*)key)->tag,EC_PRIV_KEY_PREF,3)==0 || memcmp(((const soter_container_hdr_t*)key)->tag,EC_PUB_KEY_PREF,3)==0){
+diff --git a/src/themis/secure_session.c b/src/themis/secure_session.c
+index ebe9a43..240e2b6 100644
+--- a/src/themis/secure_session.c
++++ b/src/themis/secure_session.c
+@@ -326,7 +326,7 @@ static themis_status_t secure_session_accept(secure_session_t *session_ctx, cons
+ 		return THEMIS_INVALID_PARAMETER;
+ 	}
+ 
+-	sign_key_length = ntohl(peer_sign_key->size);
++	sign_key_length = soter_container_size(peer_sign_key);
+ 
+ 	if (sizeof(soter_container_hdr_t) >= sign_key_length)
+ 	{
+@@ -500,7 +500,7 @@ static themis_status_t secure_session_proceed_client(secure_session_t *session_c
+ 		return THEMIS_INVALID_PARAMETER;
+ 	}
+ 
+-	peer_ecdh_key_length = ntohl(peer_ecdh_key->size);
++	peer_ecdh_key_length = soter_container_data_size(peer_ecdh_key) + sizeof(soter_container_hdr_t);
+ 
+ 	signature = (const uint8_t *)peer_ecdh_key + peer_ecdh_key_length;
+ 	signature_length = (const uint8_t *)data + soter_container_data_size(proto_message) + sizeof(soter_container_hdr_t) - signature;
+@@ -517,7 +517,7 @@ static themis_status_t secure_session_proceed_client(secure_session_t *session_c
+ 		return THEMIS_INVALID_PARAMETER;
+ 	}
+ 
+-	sign_key_length = ntohl(peer_sign_key->size);
++	sign_key_length = soter_container_size(peer_sign_key);
+ 
+ 	if (sizeof(soter_container_hdr_t) >= sign_key_length)
+ 	{
+diff --git a/src/themis/secure_session_message.c b/src/themis/secure_session_message.c
+index 8b95e77..d79f71a 100644
+--- a/src/themis/secure_session_message.c
++++ b/src/themis/secure_session_message.c
+@@ -61,15 +61,24 @@ themis_status_t secure_session_wrap(secure_session_t *session_ctx, const void *m
+ 	{
+ 		return THEMIS_FAIL;
+ 	}
+-
++#ifdef STRICT_ALIGNMENT
++	curr_time=htobe64(curr_time);
++	memcpy(ts, (uint8_t*)(&curr_time), 8);
++#else
+ 	*((uint64_t *)ts) = htobe64(curr_time);
+-
++#endif
+ 	*wrapped_message_length = WRAPPED_SIZE(message_length);
+ 	memmove(ts + 8, message, message_length);
+ 
++#ifdef STRICT_ALIGNMENT
++	uint32_t hsec = htonl(session_ctx->out_seq);
++	uint32_t hlength = htonl(message_length + sizeof(uint32_t) + sizeof(uint64_t));
++	memcpy((uint8_t*)seq, (uint8_t*)(&hsec), 4);
++	memcpy((uint8_t*)length, (uint8_t*)(&hlength), 4);
++#else
+ 	*seq = htonl(session_ctx->out_seq);
+ 	*length = htonl(message_length + sizeof(uint32_t) + sizeof(uint64_t));
+-
++#endif
+ 	res = soter_rand(iv, CIPHER_MAX_BLOCK_SIZE);
+ 	if (THEMIS_SUCCESS != res)
+ 	{
+@@ -82,7 +91,12 @@ themis_status_t secure_session_wrap(secure_session_t *session_ctx, const void *m
+ 		return res;
+ 	}
+ 
++#ifdef STRICT_ALIGNMENT
++	uint32_t hscsi = htonl(session_ctx->session_id);
++	memcpy((uint8_t*)session_id, (uint8_t*)(&hscsi), 4);
++#else
+ 	*session_id = htonl(session_ctx->session_id);
++#endif
+ 	session_ctx->out_seq++;
+ 
+ 	return THEMIS_SUCCESS;
+diff --git a/src/themis/secure_session_peer.c b/src/themis/secure_session_peer.c
+index 033ece7..41298c2 100644
+--- a/src/themis/secure_session_peer.c
++++ b/src/themis/secure_session_peer.c
+@@ -25,7 +25,6 @@ void secure_session_peer_cleanup(secure_session_peer_t *peer)
+ 	{
+ 		free(peer->id);
+ 	}
+-
+ 	memset(peer, 0, sizeof(secure_session_peer_t));
+ }
+ 
+@@ -47,6 +46,7 @@ themis_status_t secure_session_peer_init(secure_session_peer_t *peer, const void
+ 	memcpy(peer->id, id, id_len);
+ 
+ 	peer->sign_key = peer->id + id_len;
++
+ 	peer->sign_key_length = sign_key_len;
+ 	memcpy(peer->sign_key, sign_key, sign_key_len);
+ 
+@@ -56,6 +56,5 @@ themis_status_t secure_session_peer_init(secure_session_peer_t *peer, const void
+ 		peer->ecdh_key_length = ecdh_key_len;
+ 		memcpy(peer->ecdh_key, ecdh_key, ecdh_key_len);
+ 	}
+-
+ 	return THEMIS_SUCCESS;
+ }
+diff --git a/src/themis/secure_session_utils.c b/src/themis/secure_session_utils.c
+index 8f53d4c..911538d 100644
+--- a/src/themis/secure_session_utils.c
++++ b/src/themis/secure_session_utils.c
+@@ -32,7 +32,7 @@ soter_sign_alg_t get_key_sign_type(const void *sign_key, size_t sign_key_length)
+ 
+ 	if (sign_key_length >= sizeof(soter_container_hdr_t))
+ 	{
+-		if (sign_key_length < ntohl(key->size))
++		if (sign_key_length < soter_container_size(key))
+ 		{
+ 			return (soter_sign_alg_t)0xffffffff;
+ 		}
+@@ -57,7 +57,7 @@ soter_sign_alg_t get_peer_key_sign_type(const void *sign_key, size_t sign_key_le
+ 
+ 	if (sign_key_length >= sizeof(soter_container_hdr_t))
+ 	{
+-		if (sign_key_length < ntohl(key->size))
++		if (sign_key_length < soter_container_size(key))
+ 		{
+ 			return (soter_sign_alg_t)0xffffffff;
+ 		}
+diff --git a/src/themis/sym_enc_message.c b/src/themis/sym_enc_message.c
+index 12da6c8..e220ddd 100644
+--- a/src/themis/sym_enc_message.c
++++ b/src/themis/sym_enc_message.c
+@@ -161,7 +161,8 @@ themis_status_t themis_auth_sym_encrypt_message_(const uint8_t* key,
+   hdr->auth_tag_length=THEMIS_AUTH_SYM_AUTH_TAG_LENGTH;
+   hdr->message_length=(uint32_t)message_length;
+   size_t auth_tag_length=THEMIS_AUTH_SYM_AUTH_TAG_LENGTH;
+-  THEMIS_CHECK(themis_auth_sym_plain_encrypt(THEMIS_AUTH_SYM_ALG, key, key_length, iv, THEMIS_AUTH_SYM_IV_LENGTH, in_context, in_context_length, message, message_length, encrypted_message, encrypted_message_length, auth_tag, &auth_tag_length)==THEMIS_SUCCESS && auth_tag_length==THEMIS_AUTH_SYM_AUTH_TAG_LENGTH);
++  THEMIS_CHECK(themis_auth_sym_plain_encrypt(THEMIS_AUTH_SYM_ALG, key, key_length, iv, THEMIS_AUTH_SYM_IV_LENGTH, in_context, in_context_length, message, message_length, encrypted_message, encrypted_message_length, auth_tag, &auth_tag_length)==THEMIS_SUCCESS);
++  THEMIS_CHECK(auth_tag_length==THEMIS_AUTH_SYM_AUTH_TAG_LENGTH);
+   return THEMIS_SUCCESS;
+ }
+ 
