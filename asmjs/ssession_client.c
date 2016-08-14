@@ -18,7 +18,6 @@ struct secure_session_client_type{
 typedef struct secure_session_client_type secure_session_client_t;
 
 static int on_get_pub_key_by_id(const void* id, size_t id_length, void* key_buffer, size_t key_length, void* user_data){
-  printf("aa\n");
   if(!user_data)return -1;
   secure_session_client_t* client=(secure_session_client_t*)user_data;
   if(client->server_id_length==id_length && key_length>=client->server_pub_length && 0==memcmp(client->server_id, id, id_length)){

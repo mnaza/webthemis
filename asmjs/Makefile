@@ -1,18 +1,18 @@
 
-run: all
-	./lighttpd -m lighttpd_libs/ -f config/lighttpd.conf -D
+run: release
+	./server.py -v
 
 all: release
 
-release: themis-raw.js
+release: static/themis-raw.js
 	
 
-themis-raw.js:
-	emcc -O2 -Iinclude -s ASSERTIONS=2 -s EXPORTED_FUNCTIONS=@exported_functions key_gen.c ssession_client.c base64.c libs/libthemis.a libs/libsoter.a libs/libcrypto.a -o themis-raw.js
+static/themis-raw.js:
+	emcc -O3  --memory-init-file 0 -Iinclude -s EXPORTED_FUNCTIONS=@exported_functions key_gen.c ssession_client.c base64.c libs/libthemis.a libs/libsoter.a libs/libcrypto.a -o static/themis-raw.js
 
 debug:
-	emcc -g -Iinclude -s SAFE_HEAP=1 -s ASSERTIONS=2 -s EXPORTED_FUNCTIONS=@exported_functions key_gen.c ssession_client.c base64.c libs/libthemis.a libs/libsoter.a libs/libcrypto.a -o themis-raw.js
+	emcc -g -Iinclude -s SAFE_HEAP=1 -s ASSERTIONS=2 -s EXPORTED_FUNCTIONS=@exported_functions key_gen.c ssession_client.c base64.c libs/libthemis.a libs/libsoter.a libs/libcrypto.a -o static/themis-raw.js
 
 clean:
-	rm themis-raw.js
-	rm themis-raw.js.mem
+	rm static/themis-raw.js
+	rm static/themis-raw.js.mem

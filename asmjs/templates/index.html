@@ -1,0 +1,41 @@
+<html>
+<head>
+  <script src='{{static_resolver(filename="themis-raw.js")}}'></script>
+  <script src='{{static_resolver(filename="secure_session_client.js")}}'></script>
+</head>
+<body>
+  <script>
+    var SYSLOG;
+        
+    function _log(m){
+       if(!m) return false;
+       SYSLOG = SYSLOG || document.getElementsByTagName('body')[0].appendChild( document.createElement('textarea'));
+       SYSLOG.value = m + '\n' +SYSLOG.value;
+    }
+  </script>
+  <script>
+    var gen_key_func=Module.cwrap('gen_key','string',[]);
+    var client_pair = gen_key_func().split(' ');
+    var session = new secure_session_client('{{ url }}', client_pair[1], client_pair[0], '{{ server_id }}', '{{ server_public_key }}' );
+
+    session.onOpen = function(){
+        _log('session is open');
+        this.send("This is test");
+    }
+
+    session.onClose = function(event){
+         _log('session is close');
+    }
+
+    session.onMessage = function(msg){
+         _log('msg: '+msg);
+         this.close();
+    }
+
+    session.onError = function(error){
+        _log('error: '+error);
+        this.close();
+    }
+  </script>
+</body>
+</html>
